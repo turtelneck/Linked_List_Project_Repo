@@ -5,7 +5,7 @@ class SList:
     on a list of integers in ascending order.
 
     Attributes:
-        _head (SListNode): The head node of the list.
+        _head (SListNode): The _head node of the list.
         _size (int): The number of elements in the list.
     """
     class SListNode:
@@ -13,17 +13,17 @@ class SList:
         An inner class representing a node in the SList.
 
         Attributes:
-            data: The value stored in the node.
+            value: The value stored in the node.
             next (SListNode): The next node in the list.
         """
-        def __init__ (self, data = None):
+        def __init__ (self, value = None):
             """
             Initializes a new instance of the SListNode class.
 
             Parameters:
-                data: The value to store in the node.
+                value: The value to store in the node.
             """
-            self.data = value
+            self.value = value
             self.next = None
 
 
@@ -32,32 +32,28 @@ class SList:
         Initializes a new instance of the SList class.
         """
         self._head = None
-        self._size = 0
+        self.size = 0
 
 
     # Insert a new value in the list. Maintain nondecreasing ordering of elements
-    def insert(self, data: int):
+    def insert(self, value: int):
         """
         Inserts an item into the sorted list while maintaining ascending order.
 
         Parameters:
-            data (int): The data to be inserted.
+            value (int): The value to be inserted.
         """
-        new = SListNode(data)
+        new = self.SListNode(value)
 
-        if self.head == None:
-            new.next = self.head
-            self.head = new
+        if self._head is None:
+            new.next = self._head
+            self._head = new
             return
-        
-        curr = self.head
 
-        # if there is a next node, check to see if its value is less than new_node.data
-        while curr.next != None:
-            if curr.next.data <= new.data:
-                curr = curr.next
-            else:
-                break
+        curr = self._head
+
+        while curr.next and curr.next.value <= new.value:
+            curr = curr.next
 
         new.next = curr.next
         curr.next = new
@@ -74,9 +70,9 @@ class SList:
         Returns:
             SListNode | None: The node containing the value if found; None otherwise.
         """
-        curr = self.head
+        curr = self._head
         while curr:
-            if curr.data == value:
+            if curr.value == value:
                 return curr
             curr = curr.next
         return None
@@ -93,13 +89,13 @@ class SList:
         Returns:
             bool: True if the value was found and removed; False otherwise.
         """
-        if self.head and self.head.data == value:
-            self.head = self.head.next
+        if self._head and self._head.value == value:
+            self._head = self._head.next
             return True
 
-        curr = self.head
+        curr = self._head
 
-        while curr and curr.next and curr.next.data != value:
+        while curr and curr.next and curr.next.value != value:
             curr = curr.next
 
         if curr and curr.next:
@@ -118,14 +114,14 @@ class SList:
             value (int): The value to remove from the list.
         """
         prev = None
-        curr = self.head
+        curr = self._head
 
         while curr:
-            if curr.data == value:
+            if curr.value == value:
                 if prev:
                     prev.next = curr.next
                 else:
-                    self.head = curr.next
+                    self._head = curr.next
             else:
                 prev = curr
             curr = curr.next
@@ -140,9 +136,9 @@ class SList:
             str: The string representation of the list, with values separated by commas.
         """
         list_str = "["
-        curr = self.head
+        curr = self._head
         while curr:
-            list_str += f'{curr.data}, '
+            list_str += f'{curr.value}, '
             curr = curr.next
         return list_str[:-2] + "]"
 
@@ -180,7 +176,7 @@ class SList:
         for _ in range(index):
             curr = curr.next
 
-        return curr.data
+        return curr.value
 
     def __len__(self) -> int:
         """
@@ -190,7 +186,7 @@ class SList:
             int: The number of items in the list.
         """
         count = 0
-        curr = self.head
+        curr = self._head
         while curr:
             count += 1
             curr = curr.next

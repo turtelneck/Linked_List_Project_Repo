@@ -37,6 +37,8 @@ class Course:
 
         if not isinstance(number, int):
             raise ValueError("Course number must be an integer")
+        if number <= -1:
+            raise ValueError("Course number must be a positive integer")
         if not isinstance(name, str):
             raise ValueError("Course name must be a valid string")
         if not isinstance(credit_hours, float):
@@ -48,10 +50,10 @@ class Course:
         if grade < 0 or grade > 4.0:
             raise ValueError("Grade must be in the range 0.0 to 4.0")
 
-        self.number = number
-        self.name = name
-        self.credit_hours = credit_hours
-        self.grade = grade
+        self._number = number
+        self._name = name
+        self._credit_hours = credit_hours
+        self._grade = grade
 
 
     def __eq__(self, other: 'Course') -> bool:

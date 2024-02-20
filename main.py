@@ -1,4 +1,4 @@
-from slist import SList
+from s_list import SList
 from course import Course
 
 def calculate_gpa(courseList: SList) -> float:
@@ -35,10 +35,15 @@ def is_sorted(lyst: SList) -> bool:
             return False
     return True
 
+
 def main():
-    """
-    The main function of the program. Write your test cases here.
-    """
+    arr = SList()
+    arr.insert(1)
+    arr.insert(2)
+    arr.insert(5)
+    arr.insert(2)
+
+    print(arr)
 
 if __name__ == "__main__":
     main()
