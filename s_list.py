@@ -43,7 +43,6 @@ class SList:
         Parameters:
             data (int): The data to be inserted.
         """
-
         new = SListNode(data)
 
         if self.head == None:
@@ -75,7 +74,6 @@ class SList:
         Returns:
             SListNode | None: The node containing the value if found; None otherwise.
         """
-
         curr = self.head
         while curr:
             if curr.data == value:
@@ -95,7 +93,6 @@ class SList:
         Returns:
             bool: True if the value was found and removed; False otherwise.
         """
-        
         if self.head and self.head.data == value:
             self.head = self.head.next
             return True
@@ -142,7 +139,12 @@ class SList:
         Returns:
             str: The string representation of the list, with values separated by commas.
         """
-        pass
+        list_str = "["
+        curr = self.head
+        while curr:
+            list_str += f'{curr.data}, '
+            curr = curr.next
+        return list_str[:-2] + "]"
 
     # Return an iterator for the list
     def __iter__(self) -> 'Iterator[SListNode]':
@@ -177,4 +179,9 @@ class SList:
         Returns:
             int: The number of items in the list.
         """
-        pass
+        count = 0
+        curr = self.head
+        while curr:
+            count += 1
+            curr = curr.next
+        return count
