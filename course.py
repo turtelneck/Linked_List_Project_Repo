@@ -48,8 +48,12 @@ class Course:
         if grade < 0 or grade > 4.0:
             raise ValueError("Grade must be in the range 0.0 to 4.0")
 
+        self.number = number
+        self.name = name
+        self.credit_hours = credit_hours
+        self.grade = grade
 
-        # magic methods
+
     def __eq__(self, other: 'Course') -> bool:
         """
         Checks if this course is equal to another based on the course number.
@@ -58,9 +62,11 @@ class Course:
             other (Course): The course to compare with.
 
         Returns:
-        bool: True if the course numbers are the same, False otherwise.
+        bool: True if course numbers are equal, False if not equal.
         """
-        pass
+        if isinstance(other, Course):
+            return self.number == other.number
+        return False
 
     def __ne__(self, other: 'Course') -> bool:
         """
@@ -70,9 +76,11 @@ class Course:
             other (Course): The course to compare with.
 
         Returns:
-            bool: True if the course numbers are different, False otherwise.
+            bool: True if course numbers are not equal, False if equal.
         """
-        pass
+        if isinstance(other, Course):
+            return self.number != other.number
+        return True
 
     def __lt__(self, other: 'Course') -> bool:
         """
@@ -82,9 +90,11 @@ class Course:
             other (Course): The course to compare with.
 
         Returns:
-            bool: True if this course number is less than the other's, False otherwise.
+            bool: True if self.number is less than other.number, False otherwise.
         """
-        pass
+        if isinstance(other, Course):
+            return self.number < other.number
+        raise TypeError("Cannot compare course with non-course object")
         
     def __gt__(self, other: 'Course') -> bool:
         """
@@ -94,9 +104,11 @@ class Course:
             other (Course): The course to compare with.
 
         Returns:
-            bool: True if this course number is greater than the other's, False otherwise.
+            bool: True if self.number is greater than other.number, False otherwise.
         """
-        pass
+        if isinstance(other, Course):
+            return self.number > other.number
+        raise TypeError("Cannot compare course with non-course object")
     
     def __le__(self, other: 'Course') -> bool:
         """
@@ -106,9 +118,11 @@ class Course:
             other (Course): The course to compare with.
 
         Returns:
-            bool: True if this course number is less than or equal to the other's, False otherwise.
+            bool: True if self.number is less than or equal to other.number, False otherwise.
         """
-        pass
+        if isinstance(other, Course):
+            return self.number <= other.number
+        raise TypeError("Cannot compare course with non-course object")
         
     def __ge__(self, other: 'Course') -> bool:
         """
@@ -118,9 +132,11 @@ class Course:
             other (Course): The course to compare with.
 
         Returns:
-            bool: True if this course number is greater than or equal to the other's, False otherwise.
+            bool: True if self.number is greater than or equal to other.number, False otherwise.
         """
-        pass
+        if isinstance(other, Course):
+            return self.number >= other.number
+        raise TypeError("Cannot compare course with non-course object")
             
     def __str__(self) -> str:
         """
@@ -129,34 +145,41 @@ class Course:
         Returns:
             str: The string representation of the course.
         """
-        pass
+        return (
+            f"Course Information:\n"
+            f"  Number: {self._number}\n"
+            f"  Name: {self._name}\n"
+            f"  Credit Hours: {self._credit_hours}\n"
+            f"  Grade: {self._grade}"
+        )
+
             
     def name(self) -> str:
         """
         Returns the name of the course.
 
         Returns:
-            str: The course name.
+            str: course name.
         """
-        pass
+        return self._name
             
     def number(self) -> int:
         """
         Returns the course number.
 
         Returns:
-            int: The course number.
+            int: course number.
         """
-        pass
+        return self._number
             
     def credit_hr(self) -> float:
         """
         Returns the number of credit hours for the course.
 
         Returns:
-            float: The number of credit hours.
+            float: number of credit hours.
         """
-        pass
+        return self._credit_hours
             
     def grade(self) -> float:
         """
@@ -165,4 +188,4 @@ class Course:
         Returns:
             float: The grade.
         """
-        pass
+        return self._grade
