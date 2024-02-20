@@ -26,12 +26,14 @@ class SList:
             self.data = value
             self.next = None
 
+
     def __init__ (self):
         """
         Initializes a new instance of the SList class.
         """
         self._head = None
         self._size = 0
+
 
     # Insert a new value in the list. Maintain nondecreasing ordering of elements
     def insert(self, data: int):
@@ -61,7 +63,6 @@ class SList:
         new.next = curr.next
         curr.next = new
 
-
     
     # Search for a value in the list, return it if found, None otherwise
     def find(self, value: int) -> Union['SListNode', None]:#'SListNode' | None:
@@ -74,7 +75,14 @@ class SList:
         Returns:
             SListNode | None: The node containing the value if found; None otherwise.
         """
-        pass
+
+        curr = self.head
+        while curr:
+            if curr.data == value:
+                return curr
+            curr = curr.next
+        return None
+
 
     # Remove the first occurance of value.
     def remove(self, value):
@@ -87,7 +95,22 @@ class SList:
         Returns:
             bool: True if the value was found and removed; False otherwise.
         """
-        pass
+        
+        if self.head and self.head.data == value:
+            self.head = self.head.next
+            return True
+
+        curr = self.head
+
+        while curr and curr.next and curr.next.data != value:
+            curr = curr.next
+
+        if curr and curr.next:
+            curr.next = curr.next.next
+            return True
+
+        return False
+
 
     # Remove all instances of value
     def remove_all(self, value):
@@ -97,7 +120,18 @@ class SList:
         Parameters:
             value (int): The value to remove from the list.
         """
-        pass
+        prev = None
+        curr = self.head
+
+        while curr:
+            if curr.data == value:
+                if prev:
+                    prev.next = curr.next
+                else:
+                    self.head = curr.next
+            else:
+                prev = curr
+            curr = curr.next
 
 
     # Convert the list to a string and return it
