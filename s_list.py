@@ -154,7 +154,10 @@ class SList:
         Returns:
             Iterator[SListNode]: An iterator that allows traversal of the list.
         """
-        pass
+        curr = self._head
+        while curr:
+            yield curr
+            curr = curr.next
 
     # Return the item at the given index, or throw an exception if invalid index
     def __getitem__(self, index: int) -> int:
@@ -170,7 +173,14 @@ class SList:
         Returns:
             int: The value of the node at the specified index.
         """
-        pass
+        if index < 0 or index >= len(self):
+            raise IndexError("Index out of bounds")
+
+        curr = self._head
+        for _ in range(index):
+            curr = curr.next
+
+        return curr.data
 
     def __len__(self) -> int:
         """

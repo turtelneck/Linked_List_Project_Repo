@@ -1,3 +1,6 @@
+from slist import SList
+from course import Course
+
 def calculate_gpa(courseList: SList) -> float:
     """
     Calculates the GPA based on a list of Course objects.
