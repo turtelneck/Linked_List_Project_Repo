@@ -41,14 +41,26 @@ class SList:
         Parameters:
             data (int): The data to be inserted.
         """
+
+        new = SListNode(data)
+
         if self.head == None:
-            self.head = SListNode(data)
+            new.next = self.head
+            self.head = new
             return
         
-        if self.head.data >=
-        # TODO: complete logic
-        # TODO: complete logic
-        # TODO: complete logic
+        curr = self.head
+
+        # if there is a next node, check to see if its value is less than new_node.data
+        while curr.next != None:
+            if curr.next.data <= new.data:
+                curr = curr.next
+            else:
+                break
+
+        new.next = curr.next
+        curr.next = new
+
 
     
     # Search for a value in the list, return it if found, None otherwise
