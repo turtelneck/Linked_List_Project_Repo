@@ -154,7 +154,6 @@ class Course:
             f"  Credit Hours: {self._credit_hours}\n"
             f"  Grade: {self._grade}"
         )
-
             
     def name(self) -> str:
         """
@@ -173,7 +172,7 @@ class Course:
             int: course number.
         """
         return self._number
-            
+          
     def credit_hr(self) -> float:
         """
         Returns the number of credit hours for the course.
@@ -182,7 +181,7 @@ class Course:
             float: number of credit hours.
         """
         return self._credit_hours
-            
+
     def grade(self) -> float:
         """
         Returns the grade received for the course.

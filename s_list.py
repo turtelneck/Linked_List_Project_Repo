@@ -1,4 +1,6 @@
 from typing import Union, Optional
+from course import Course
+
 class SList:
     """
     A class that implements a sorted list ADT capable of storing and performing operations
@@ -13,17 +15,17 @@ class SList:
         An inner class representing a node in the SList.
 
         Attributes:
-            value: The value stored in the node.
+            data_obj: The data_obj stored in the node.
             next (SListNode): The next node in the list.
         """
-        def __init__ (self, value = None):
+        def __init__ (self, data_obj = None):
             """
             Initializes a new instance of the SListNode class.
 
             Parameters:
-                value: The value to store in the node.
+                data_obj: The data_obj to store in the node.
             """
-            self.value = value
+            self.data_obj = data_obj
             self.next = None
 
 
@@ -35,15 +37,15 @@ class SList:
         self.size = 0
 
 
-    # Insert a new value in the list. Maintain nondecreasing ordering of elements
-    def insert(self, value: int):
+    # Insert a new data_obj in the list. Maintain nondecreasing ordering of elements
+    def insert(self, data_obj):
         """
         Inserts an item into the sorted list while maintaining ascending order.
 
         Parameters:
-            value (int): The value to be inserted.
+            data_obj (int): The data_obj to be inserted.
         """
-        new = self.SListNode(value)
+        new = self.SListNode(data_obj)
 
         if self._head is None:
             new.next = self._head
@@ -52,50 +54,50 @@ class SList:
 
         curr = self._head
 
-        while curr.next and curr.next.value <= new.value:
+        while curr.next and curr.next.data_obj.number() <= new.data_obj.number():
             curr = curr.next
 
         new.next = curr.next
         curr.next = new
 
     
-    # Search for a value in the list, return it if found, None otherwise
-    def find(self, value: int) -> Union['SListNode', None]:#'SListNode' | None:
+    # Search for a data_obj in the list, return it if found, None otherwise
+    def find(self, data_obj) -> Union['SListNode', None]:#'SListNode' | None:
         """
-        Searches for the first node containing the specified value.
+        Searches for the first node containing the specified data_obj.
 
         Parameters:
-            value (int): The value to search for in the list.
+            data_obj (int): The data_obj to search for in the list.
 
         Returns:
-            SListNode | None: The node containing the value if found; None otherwise.
+            SListNode | None: The node containing the data_obj if found; None otherwise.
         """
         curr = self._head
         while curr:
-            if curr.value == value:
+            if curr.data_obj.number() == data_obj.number():
                 return curr
             curr = curr.next
         return None
 
 
-    # Remove the first occurance of value.
-    def remove(self, value):
+    # Remove the first occurance of data_obj.
+    def remove(self, data_obj):
         """
-        Removes the first occurrence of the specified value from the list.
+        Removes the first occurrence of the specified data_obj from the list.
 
         Parameters:
-            value (int): The value to remove from the list.
+            data_obj (int): The data_obj to remove from the list.
 
         Returns:
-            bool: True if the value was found and removed; False otherwise.
+            bool: True if the data_obj was found and removed; False otherwise.
         """
-        if self._head and self._head.value == value:
+        if self._head and self._head.data_obj == data_obj:
             self._head = self._head.next
             return True
 
         curr = self._head
 
-        while curr and curr.next and curr.next.value != value:
+        while curr and curr.next and curr.next.data_obj.number() != data_obj.number():
             curr = curr.next
 
         if curr and curr.next:
@@ -105,19 +107,19 @@ class SList:
         return False
 
 
-    # Remove all instances of value
-    def remove_all(self, value):
+    # Remove all instances of data_obj
+    def remove_all(self, data_obj):
         """
-        Removes all instances of the specified value from the list.
+        Removes all instances of the specified data_obj from the list.
 
         Parameters:
-            value (int): The value to remove from the list.
+            data_obj (int): The data_obj to remove from the list.
         """
         prev = None
         curr = self._head
 
         while curr:
-            if curr.value == value:
+            if curr.data_obj.number() == data_obj.number():
                 if prev:
                     prev.next = curr.next
                 else:
@@ -133,12 +135,12 @@ class SList:
         Returns a string representation of the list.
 
         Returns:
-            str: The string representation of the list, with values separated by commas.
+            str: The string representation of the list, with data_objs separated by commas.
         """
         list_str = "["
         curr = self._head
         while curr:
-            list_str += f'{curr.value}, '
+            list_str += f'{curr.data_obj}, '
             curr = curr.next
         return list_str[:-2] + "]"
 
@@ -167,7 +169,7 @@ class SList:
             IndexError: If the index is out of bounds.
 
         Returns:
-            int: The value of the node at the specified index.
+            int: The data_obj of the node at the specified index.
         """
         if index < 0 or index >= len(self):
             raise IndexError("Index out of bounds")
@@ -176,7 +178,7 @@ class SList:
         for _ in range(index):
             curr = curr.next
 
-        return curr.value
+        return curr.data_obj
 
     def __len__(self) -> int:
         """

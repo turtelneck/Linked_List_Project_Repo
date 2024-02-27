@@ -37,11 +37,19 @@ def is_sorted(lyst: SList) -> bool:
 
 
 def main():
+    
+    math_1 = Course(1010, "Algebra", 4.0, 3.0)
+    math_2 = Course(1010, "Algebra", 4.0, 3.5)
+    english = Course(2030, "English", 4.0, 3.8)
+    science = Course(3000, "Biology", 4.0, 3.9)
+    art = Course(4810, "Painting", 4.0, 3.1)
+    
     arr = SList()
-    arr.insert(1)
-    arr.insert(2)
-    arr.insert(5)
-    arr.insert(2)
+    arr.insert(math_1)
+    arr.insert(math_2)
+    arr.insert(art)
+    arr.insert(science)
+    arr.insert(english)
 
     print(arr)
 
