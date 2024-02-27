@@ -62,7 +62,7 @@ class SList:
 
     
     # Search for a data_obj in the list, return it if found, None otherwise
-    def find(self, data_obj) -> Union['SListNode', None]:#'SListNode' | None:
+    def find(self, num) -> Union['SListNode', None]:#'SListNode' | None:
         """
         Searches for the first node containing the specified data_obj.
 
@@ -74,30 +74,30 @@ class SList:
         """
         curr = self._head
         while curr:
-            if curr.data_obj.number() == data_obj.number():
-                return curr
+            if curr.data_obj.number() == num:
+                return curr.data_obj
             curr = curr.next
         return None
 
 
     # Remove the first occurance of data_obj.
-    def remove(self, data_obj):
+    def remove(self, num):
         """
         Removes the first occurrence of the specified data_obj from the list.
 
         Parameters:
-            data_obj (int): The data_obj to remove from the list.
+            num (int): The course number to remove from the list.
 
         Returns:
-            bool: True if the data_obj was found and removed; False otherwise.
+            bool: True if num was found and removed; False otherwise.
         """
-        if self._head and self._head.data_obj == data_obj:
+        if self._head and self._head.data_obj.number() == num:
             self._head = self._head.next
             return True
 
         curr = self._head
 
-        while curr and curr.next and curr.next.data_obj.number() != data_obj.number():
+        while curr and curr.next and curr.next.data_obj.number() != num:
             curr = curr.next
 
         if curr and curr.next:
@@ -108,26 +108,26 @@ class SList:
 
 
     # Remove all instances of data_obj
-    def remove_all(self, data_obj):
+    def remove_all(self, num):
         """
-        Removes all instances of the specified data_obj from the list.
+        Removes all instances of the specified num from the list.
 
         Parameters:
-            data_obj (int): The data_obj to remove from the list.
+            num (int): The num to remove from the list.
         """
         prev = None
         curr = self._head
-
+        
         while curr:
-            if curr.data_obj.number() == data_obj.number():
+            if curr.data_obj.number() == num:
                 if prev:
                     prev.next = curr.next
                 else:
                     self._head = curr.next
             else:
                 prev = curr
-            curr = curr.next
 
+            curr = curr.next
 
     # Convert the list to a string and return it
     def __str__(self) -> str:

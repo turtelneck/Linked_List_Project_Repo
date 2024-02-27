@@ -1,5 +1,6 @@
 from s_list import SList
 from course import Course
+import random
 
 def calculate_gpa(courseList: SList) -> float:
     """
@@ -36,6 +37,62 @@ def is_sorted(lyst: SList) -> bool:
     return True
 
 
+def test_passed_6():
+    cl = SList()
+    cl.insert(Course(1000))
+    for _ in range(20):
+        cl.insert(Course(1200))
+    cl.insert(Course(1800))
+
+    if len(cl) != 22:
+        print("cl len: " + str(len(cl)))
+        print("Unexpected SList length result.")
+        return False
+    cl.remove_all(1200)
+    if len(cl) != 2:
+        print("cl len: " + str(len(cl)))
+        print("Unexpected SList length result.")
+        return False
+    else:
+        return True
+    
+
+
+def test_passed_5():
+    random.seed(0)
+    cl = SList()
+    courseNumbers = []
+    for _ in range(37):
+        courseNumbers.append(random.randrange(1000, 7000))
+    for number in courseNumbers:
+        cl.insert(Course(number, "test", 1.0, 2.0))
+    course = cl.find(courseNumbers[0])
+    if course.data_obj.number() != courseNumbers[0]:
+        #print("Course index failed:\ncourse.number() != courseNumbers[0]")
+        return False
+    course = cl.find(courseNumbers[10])
+    if course.data_obj.number() != courseNumbers[10]:
+        #print("Course index failed:\ncourse.number() != courseNumbers[10]")
+        return False
+    course = cl.find(courseNumbers[36])
+    if course.data_obj.number() != courseNumbers[36]:
+        #print("Course index failed:\ncourse.number() != courseNumbers[36]")
+        return False
+    #print("Courses added...")
+    for i in range(0, 30, 3):
+        cl.remove(courseNumbers[i])
+    #print("Courses removed...")
+    if len(cl) != 27:
+        #print("Unexpected SList length result.")
+        return False
+    if is_sorted(cl) is False:
+        #print("SList is not sorted.")
+        return False
+    return True
+
+
+
+
 def main():
     
     math_1 = Course(1010, "Algebra", 4.0, 3.0)
@@ -50,8 +107,12 @@ def main():
     arr.insert(art)
     arr.insert(science)
     arr.insert(english)
-
-    print(arr)
+    
+    # print(arr)
+    print(test_passed_5())
 
 if __name__ == "__main__":
     main()
+    
+    
+  

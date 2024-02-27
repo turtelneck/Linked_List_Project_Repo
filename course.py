@@ -109,7 +109,7 @@ class Course:
             bool: True if self.number is greater than other.number, False otherwise.
         """
         if isinstance(other, Course):
-            return self.number > other.number
+            return self.number() > other.number()
         raise TypeError("Cannot compare course with non-course object")
     
     def __le__(self, other: 'Course') -> bool:
