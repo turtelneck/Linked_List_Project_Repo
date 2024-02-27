@@ -14,8 +14,8 @@ def calculate_gpa(courseList: SList) -> float:
     sumGrades = 0
     credits = 0
     for course in courseList:
-        sumGrades += course.value.grade() * course.value.credit_hr()
-        credits += course.value.credit_hr()
+        sumGrades += course.data_obj.grade() * course.data_obj.credit_hr()
+        credits += course.data_obj.credit_hr()
     if credits == 0:
         return 0
     return sumGrades / credits
