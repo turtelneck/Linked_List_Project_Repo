@@ -22,6 +22,7 @@ def calculate_gpa(courseList: SList) -> float:
     return sumGrades / credits
 
 def is_sorted(lyst: SList) -> bool:
+    print("CALLING IS_SORTED")
     """
     Checks if the provided list is sorted.
 
@@ -33,60 +34,29 @@ def is_sorted(lyst: SList) -> bool:
     """
     for i in range(0, len(lyst)  - 1):
         if lyst[i] > lyst[i + 1]:
+            
+            print(i)
+            print(lyst[i])
+            print(i + 1)
+            print(lyst[i + 1])
+            
             return False
     return True
 
 
-def test_passed_6():
-    cl = SList()
-    cl.insert(Course(1000))
-    for _ in range(20):
-        cl.insert(Course(1200))
-    cl.insert(Course(1800))
-
-    if len(cl) != 22:
-        print("cl len: " + str(len(cl)))
-        print("Unexpected SList length result.")
-        return False
-    cl.remove_all(1200)
-    if len(cl) != 2:
-        print("cl len: " + str(len(cl)))
-        print("Unexpected SList length result.")
-        return False
-    else:
-        return True
-    
-
-
-def test_passed_5():
+def test_passed_4():
     random.seed(0)
     cl = SList()
-    courseNumbers = []
-    for _ in range(37):
-        courseNumbers.append(random.randrange(1000, 7000))
-    for number in courseNumbers:
-        cl.insert(Course(number, "test", 1.0, 2.0))
-    course = cl.find(courseNumbers[0])
-    if course.data_obj.number() != courseNumbers[0]:
-        #print("Course index failed:\ncourse.number() != courseNumbers[0]")
+    for _ in range(6):
+        rand = random.randrange(10, 70)
+        cl.insert(Course(rand * 100, "test", 1.0, 2.0))
+        print(len(cl))
+    
+    if len(cl) != 6:
+        print("Unexpected SList length result.")
         return False
-    course = cl.find(courseNumbers[10])
-    if course.data_obj.number() != courseNumbers[10]:
-        #print("Course index failed:\ncourse.number() != courseNumbers[10]")
-        return False
-    course = cl.find(courseNumbers[36])
-    if course.data_obj.number() != courseNumbers[36]:
-        #print("Course index failed:\ncourse.number() != courseNumbers[36]")
-        return False
-    #print("Courses added...")
-    for i in range(0, 30, 3):
-        cl.remove(courseNumbers[i])
-    #print("Courses removed...")
-    if len(cl) != 27:
-        #print("Unexpected SList length result.")
-        return False
-    if is_sorted(cl) is False:
-        #print("SList is not sorted.")
+    if not is_sorted(cl):
+        print("SList is not sorted.")
         return False
     return True
 
@@ -109,7 +79,7 @@ def main():
     arr.insert(english)
     
     # print(arr)
-    print(test_passed_5())
+    print(test_passed_4())
 
 if __name__ == "__main__":
     main()

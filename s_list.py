@@ -23,7 +23,7 @@ class SList:
             Initializes a new instance of the SListNode class.
 
             Parameters:
-                data_obj: The data_obj to store in the node.
+                data_obj: The course to store in the node.
             """
             self.data_obj = data_obj
             self.next = None
@@ -39,30 +39,35 @@ class SList:
 
     # Insert a new data_obj in the list. Maintain nondecreasing ordering of elements
     def insert(self, data_obj):
+        print("CALLING INSERT")
         """
         Inserts an item into the sorted list while maintaining ascending order.
 
         Parameters:
-            data_obj (int): The data_obj to be inserted.
+            data_obj (course): The course to be inserted.
         """
-        new = self.SListNode(data_obj)
+        new_node = self.SListNode(data_obj)
 
-        if self._head is None:
-            new.next = self._head
-            self._head = new
-            return
+        # If the list is empty or the new node should be the first
+        if self._head is None or data_obj < self._head.data_obj:
+            new_node.next = self._head
+            self._head = new_node
+        else:
+            current = self._head
 
-        curr = self._head
+            # Find the appropriate position to insert the new node
+            while current.next is not None and data_obj > current.next.data_obj:
+                current = current.next
 
-        while curr.next and curr.next.data_obj.number() <= new.data_obj.number():
-            curr = curr.next
+            new_node.next = current.next
+            current.next = new_node
 
-        new.next = curr.next
-        curr.next = new
+        self.size += 1
 
     
     # Search for a data_obj in the list, return it if found, None otherwise
     def find(self, num) -> Union['SListNode', None]:#'SListNode' | None:
+        print("CALLING FIND")
         """
         Searches for the first node containing the specified data_obj.
 
@@ -73,11 +78,14 @@ class SList:
             SListNode | None: The node containing the data_obj if found; None otherwise.
         """
         curr = self._head
+        feaux_idx = 0
+        
         while curr:
             if curr.data_obj.number() == num:
-                return curr.data_obj
+                return feaux_idx
             curr = curr.next
-        return None
+            feaux_idx += 1
+        return -1
 
 
     # Remove the first occurance of data_obj.

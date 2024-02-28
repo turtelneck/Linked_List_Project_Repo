@@ -67,7 +67,7 @@ class Course:
         bool: True if course numbers are equal, False if not equal.
         """
         if isinstance(other, Course):
-            return self.number == other.number
+            return self.number() == other.number()
         return False
 
     def __ne__(self, other: 'Course') -> bool:
@@ -81,7 +81,7 @@ class Course:
             bool: True if course numbers are not equal, False if equal.
         """
         if isinstance(other, Course):
-            return self.number != other.number
+            return self.number() != other.number()
         return True
 
     def __lt__(self, other: 'Course') -> bool:
@@ -95,7 +95,7 @@ class Course:
             bool: True if self.number is less than other.number, False otherwise.
         """
         if isinstance(other, Course):
-            return self.number < other.number
+            return self.number() < other.number()
         raise TypeError("Cannot compare course with non-course object")
         
     def __gt__(self, other: 'Course') -> bool:
@@ -123,7 +123,7 @@ class Course:
             bool: True if self.number is less than or equal to other.number, False otherwise.
         """
         if isinstance(other, Course):
-            return self.number <= other.number
+            return self.number() <= other.number()
         raise TypeError("Cannot compare course with non-course object")
         
     def __ge__(self, other: 'Course') -> bool:
@@ -137,7 +137,7 @@ class Course:
             bool: True if self.number is greater than or equal to other.number, False otherwise.
         """
         if isinstance(other, Course):
-            return self.number >= other.number
+            return self.number() >= other.number()
         raise TypeError("Cannot compare course with non-course object")
             
     def __str__(self) -> str:
